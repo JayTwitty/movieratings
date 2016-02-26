@@ -2,6 +2,7 @@
   <dictionary name="jtwitty">
     <words>
       <w>movieratings</w>
+      <w>toptwenty</w>
     </words>
   </dictionary>
 </component>

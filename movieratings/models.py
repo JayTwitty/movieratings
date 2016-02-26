@@ -2,22 +2,21 @@ from django.db import models
 
 # Create your models here.
 GENDER_CHOICES = {
-    ('m', 'male'),
-    ('f', 'female')
+    ('M', 'male'),
+    ('F', 'female')
 }
 
 class Rater(models.Model):
-    user_id = models.IntegerField(primary_key=True)
     age = models.IntegerField()
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     occupation = models.CharField(max_length=30)
-    zip_code = models.CharField(max_length=5)
+    zip_code = models.CharField(max_length=10)
+
 
 class Movie(models.Model):
-    movie_id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=100)
     release_date = models.CharField(max_length=30)
-    video_release_date = models.CharField(max_length=30)
+    video_release_date = models.CharField(max_length=30, blank=True, default="")
     imdb_url = models.URLField()
     unknown_genre = models.BooleanField(default=0)
     action = models.BooleanField(default=0)
@@ -39,8 +38,10 @@ class Movie(models.Model):
     war = models.BooleanField(default=0)
     western = models.BooleanField(default=0)
 
+
+
 class Review(models.Model):
     reviewer = models.ForeignKey(Rater)
     movie = models.ForeignKey(Movie)
     rating = models.IntegerField()
-    time = models.IntegerField()
+
