@@ -37,7 +37,10 @@ class Movie(models.Model):
     thriller = models.BooleanField(default=0)
     war = models.BooleanField(default=0)
     western = models.BooleanField(default=0)
+    avg_rating = models.FloatField(default=0)
 
+    def __str__(self):
+        return (self.title)
 
 
 class Review(models.Model):
