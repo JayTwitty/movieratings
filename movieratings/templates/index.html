@@ -6,15 +6,35 @@
 <head>
     <meta charset="UTF-8">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href="{% static 'site.css' %}" rel="stylesheet">
     <title>Movie Reviews</title>
 </head>
 <body class="container">
 <ul class="nav nav-tabs">
   <li role="presentation" class="active"><a href="#">Home</a></li>
-  <li role="presentation"><a href="#">Profile</a></li>
-  <li role="presentation"><a href="#">Messages</a></li>
+  <li role="presentation"><a href="{% url 'top_twenty' %}">Top Twenty</a></li>
 </ul>
-Test
+<h1 class="center"><u>Movie Ratings</u></h1>
+<h4 class="center"><em>"MovieLens data was collected by the<br>GroupLens Research Project
+    at the University of Minnesota"</em></h4>
+<br>
+<table class="table table-hover center">
+<tr>
+    <th class="center">Movie</th>
+    <th class="center">Release Date</th>
+    <th class="center">IMDb Link</th>
+</tr>
+{% for movie in every_movie %}
+<tr>
+    <td><a href="{% url 'movie' movie.pk %}">{{ movie.title }}</a></td>
+    <td>{{ movie.release_date }}</td>
+    <td><a target="_blank" href="{{ movie.imdb_url }}">Click for More Info</a></td>
+{% endfor %}
+    </tr>
+</table>
+
+
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>
 </html>

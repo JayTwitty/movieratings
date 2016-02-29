@@ -1,0 +1,40 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href="{% static 'site.css' %}" rel="stylesheet">
+    <title>Reviewer ID#: {{ individual.id }}</title>
+</head>
+<body class="container">
+<ul class="nav nav-tabs">
+    <li role="presentation"><a href="{% url 'index_view' %}">Home</a></li>
+    <li role="presentation"><a href="{% url 'top_twenty' %}">Top Twenty</a></li>
+</ul>
+
+    <h1 class="center"><div>Reviewer ID#: {{ individual.id }}<br> <u>Demographic Info</u></div></h1>
+<h3 class="center">
+<span>Age: {{ individual.age }} | </span>
+<span>Gender: {{ individual.gender }} |</span>
+<span>Occupation: {{ individual.occupation }} |</span>
+<span>Zip Code: {{ individual.zip_code }} </span>
+</h3>
+<br>
+<table class="table table-condensed table-hover center">
+    <tr><th class="center">Movies Rated:</th>
+        <th class="center">Rating:</th>
+        </tr>
+    {% for movies in rater_movies %}
+        <tr>
+            <td><a href="{% url 'movie' movies.movie.pk %}">{{ movies.movie }}</a></td>
+            <td>{{ movies.rating }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</body>
+</html>

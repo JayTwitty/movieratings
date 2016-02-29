@@ -1,18 +1,72 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <title>Title</title>
+    <link href="{% static 'site.css' %}" rel="stylesheet">
+    <title>{{ movie.title }}</title>
 </head>
 <body class="container">
 <ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="#">Home</a></li>
-  <li role="presentation"><a href="#">Profile</a></li>
-  <li role="presentation"><a href="#">Messages</a></li>
+  <li role="presentation"><a href="{% url 'index_view' %}">Home</a></li>
+  <li role="presentation"><a href="{% url 'top_twenty' %}">Top Twenty</a></li>
 </ul>
-TEst
-{}
+
+<h1 class="center"><a target="_blank" href="{{ movie.imdb_url }}">{{ movie.title }}</a></h1>
+<h3 class="center">Average Rating: {{ movie.avg_rating }}</h3>
+<br>
+<div class="panel panel-default center">
+      <div class="panel-heading"><strong>Rate This Movie Below:</strong></div>
+  <div class="panel-body">
+<form class="form-inline">
+  <div class="form-group">
+    <label for="exampleInputName2"> Age: </label>
+    <input type="text" class="form-control" id="exampleInputName2" placeholder="Age Here">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail2"> Gender: </label>
+    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Gender Here">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail2"> Occupation: </label>
+    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Occupation Here">
+  </div>
+   <div class="form-group">
+    <label for="exampleInputEmail2"> Zip Code: </label>
+    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Zip Code Here">
+       </div>
+        <br>
+        <br>
+    <label for="exampleInputEmail2"> Rating:
+       <select class="form-control">
+           <option>5</option>
+           <option>4</option>
+           <option>3</option>
+           <option>2</option>
+           <option>1</option>
+       </select></label>
+    <button type="submit" class="btn btn-default">Submit Review</button>
+</form>
+  </div>
+
+</div>
+
+<table class="table table-bordered table-hover center">
+<tr>
+    <th class="center">Reviewer ID No:</th>
+    <th class="center">Reviewer Movie Rating:</th>
+</tr>
+    {% for reviewer in reviewers %}
+<tr>
+    <td><a href="{% url 'all_users' reviewer.reviewer.id %}">{{ reviewer.reviewer.id }}</a></td>
+    <td>{{ reviewer.rating }}</td>
+</tr>
+    {% endfor %}
+</table>
+
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>
 </html>

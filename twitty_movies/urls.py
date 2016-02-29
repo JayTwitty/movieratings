@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from movieratings.views import index_views, top_twenty_views, movie_page, movie_views
+from movieratings.views import top_twenty_views, movie_page, all_of_the_movies, every_user
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', index_views, name="index_view"),
+    url(r'^$', all_of_the_movies, name="index_view"),
     url(r'^toptwenty/', top_twenty_views, name="top_twenty"),
-    url(r'^(?P<pk>\d+)$', movie_page, name="movie")
+    url(r'^(?P<pk>\d+)$', movie_page, name="movie"),
+    url(r'^user/(?P<pk>\d+)$',every_user, name="all_users")
 ]
