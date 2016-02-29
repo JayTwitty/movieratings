@@ -11,8 +11,23 @@ def top_twenty_views(request):
 
 
 def movie_page(request, pk):
-    reviewers = Review.objects.filter(movie_id=pk)
     movie = Movie.objects.get(id=pk)
+    print(request.POST)
+    if request.POST:
+        rater_age = request.POST['age_input']
+        rater_gender = request.POST['gender_input']
+        rater_occupation = request.POST['occupation_input']
+        rater_zipcode = request.POST['zipcode_input']
+        rater_review = request.POST['rating_input']
+        try:
+            rater = Rater.objects.create(age=rater_age, gender=rater_gender, occupation=rater_occupation, zip_code=rater_zipcode)
+        except Exception:
+            print("Invalid Entry")
+        try:
+            Review.objects.create(reviewer= rater, movie=movie, rating=rater_review)
+        except Exception:
+            print("Invalid Entry")
+    reviewers = Review.objects.filter(movie_id=pk)
     movie_ratings = Movie.objects.filter(id=pk)
     return render(request, 'movies.html', {'reviewers': reviewers,
                                            'movie': movie,

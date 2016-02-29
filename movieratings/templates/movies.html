@@ -15,39 +15,51 @@
 </ul>
 
 <h1 class="center"><a target="_blank" href="{{ movie.imdb_url }}">{{ movie.title }}</a></h1>
-<h3 class="center">Average Rating: {{ movie.avg_rating }}</h3>
+<h3 class="center"><u>Average Rating:</u> {{ movie.avg_rating }}</h3>
 <br>
+
 <div class="panel panel-default center">
       <div class="panel-heading"><strong>Submit Your Own Rating For This Movie Here:</strong></div>
+
   <div class="panel-body">
-<form class="form-inline">
+<form method="post" class="form-inline">
+    {% csrf_token %}
   <div class="form-group">
     <label for="exampleInputName2"> Age: </label>
-    <input type="text" class="form-control" id="exampleInputName2" placeholder="Age Here">
+    <input type="text" class="form-control" id="age_input" name ="age_input" placeholder="Age Here">
   </div>
+
   <div class="form-group">
-    <label for="exampleInputEmail2"> Gender: </label>
-    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Gender Here">
+    <label for="exampleInputEmail2"> Gender:
+        <select name = "gender_input" class="form-control">
+            <option>M</option>
+            <option>F</option> </select></label>
   </div>
+
   <div class="form-group">
     <label for="exampleInputEmail2"> Occupation: </label>
-    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Occupation Here">
+    <input type="text" class="form-control" name="occupation_input" placeholder="Occupation Here">
   </div>
+
    <div class="form-group">
     <label for="exampleInputEmail2"> Zip Code: </label>
-    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Zip Code Here">
+    <input type="text" class="form-control" name="zipcode_input" placeholder="Zip Code Here">
        </div>
+
         <br>
         <br>
+
     <label for="exampleInputEmail2"> Rating:
-       <select class="form-control">
+       <select name = "rating_input" class="form-control">
            <option>5</option>
            <option>4</option>
            <option>3</option>
            <option>2</option>
            <option>1</option>
        </select></label>
+
     <button type="submit" class="btn btn-default">Submit Review</button>
+
 </form>
   </div>
 
